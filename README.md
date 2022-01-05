@@ -22,3 +22,8 @@ Copy the .env_example to .env and add your account private key. Only one account
 
 Use this to run tests on kovan testnet.
 npx hardhat test ./test/Box.test.js --network kovan --verbose
+
+# Contracts
+
+DiceRoller is my original contract that works manually.
+Box is from openzepplin docs and I expanded it as a simplified version of the DiceRoller contract for troubleshooting.
