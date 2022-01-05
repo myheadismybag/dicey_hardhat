@@ -13,3 +13,12 @@ npx hardhat node
 node scripts/sample-script.js
 npx hardhat help
 ```
+# Issues I am having
+
+My test cases work fine when run locally and the contract operates as expected when I use remix or the hardhat console.
+When I run my tests, the last one fails because of out of gas error. I dont understand why it differs between the automated tests and manually.
+
+Copy the .env_example to .env and add your account private key. Only one account is needed for these tests.
+
+Use this to run tests on kovan testnet.
+npx hardhat test ./test/Box.test.js --network kovan --verbose
