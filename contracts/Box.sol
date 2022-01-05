@@ -114,4 +114,47 @@ contract Box is Ownable {
     function retrieve() public view returns (uint256) {
         return _value;
     }
+
+    /// Used to perform specific logic based on if user has rolled previoulsy or not.
+    function hasRolledOnce(address _member) public view returns(bool) {
+        return (rollerHistory[_member].length > 0);
+    }
+
+    /**
+    * Called by the front end if user wants to use the front end to 
+    * generate the random values. We just use this to store the result of the roll on the blockchain.
+    *
+    * @param _numberOfDie how many dice are rolled
+    * @param _dieSize the type of die rolled (4 = 4 sided, 6 = six sided, etc.)
+    * @param _adjustment the modifier to add after all die have been rolled. Can be negative.
+    * @param _result can be negative if you have a low enough dice roll and larger negative adjustment.
+    * Example, rolled 2 4 sided die with -4 adjustment.
+    */
+    function hasRolled(uint8 _numberOfDie, uint8 _dieSize, int8 _adjustment, int8 _result) 
+        public 
+        validateNumberOfDie(_numberOfDie)
+        validateDieSize(_dieSize)
+        validateAdjustment(_adjustment)
+    {
+        DiceRollee memory diceRollee = DiceRollee(
+                msg.sender, 
+                block.timestamp,
+                0, 
+                _numberOfDie, 
+                _dieSize, 
+                _adjustment, 
+                _result, 
+                true,
+                new uint8[](_numberOfDie)
+                );
+
+        currentRoll[msg.sender] = diceRollee;
+        rollerHistory[msg.sender].push(diceRollee);
+
+        /// Only add roller to this list once.
+        if (! hasRolledOnce(msg.sender)) {
+            rollerAddresses.push(msg.sender);
+        }
+    }
+    
 }

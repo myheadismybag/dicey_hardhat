@@ -20,14 +20,14 @@ describe('DiceRoller', function () {
   });
 
   // Test case
-  it('will return false from hasRolledOnce when an address has not rolled yet.', async () => {
+  it('will return false from hasRolledOnce when an address has not rolled yet.', async function() {
     const hasRolled = await diceRoller.hasRolledOnce( addr1.address );
     // assert.equal(hasRolled, false, "Unrolled address should return false");
     expect(hasRolled).to.equal(false);
   });
 
   
-  it('will return true from hasRolledOnce when an address has called hasRolled.', async () => {
+  it('will return true from hasRolledOnce when an address has called hasRolled.', async function() {
     let hasRolled = await diceRoller.hasRolledOnce( addr1.address );
     // assert.equal(hasRolled, false, "Address should return true");
     expect(hasRolled).to.equal(false);
@@ -50,13 +50,13 @@ describe('DiceRoller', function () {
     expect(hasRolled).to.equal(true);
   });
 
-  it('will return 0 from getUserRollsCount when an address has not rolled yet.', async () => {
+  it('will return 0 from getUserRollsCount when an address has not rolled yet.', async function() {
     let userRollCount = await diceRoller.getUserRollsCount(addr1.address)
     // assert.equal(userRollCount, 0, "getUserRollsCount should be 0");
     expect(userRollCount).to.equal(0);
   });
 
-  it('will increment the value from getUserRollsCount when an address has called hasRolled.', async () => {
+  it('will increment the value from getUserRollsCount when an address has called hasRolled.', async function() {
 
     let userRollCount = await diceRoller.getUserRollsCount(addr1.address)
     // assert.equal(userRollCount, 0, "getUserRollsCount should be 0");
@@ -90,7 +90,7 @@ describe('DiceRoller', function () {
   catch(err){console.log('FFF: ' + err.stack)}
   });
 
-  it('will fail if too many dice are used.', async () => {
+  it('will fail if too many dice are used.', async function() {
     const numberOfDie = 14;
     const dieSize = 10;
     const adjustment = 0;
@@ -107,7 +107,7 @@ describe('DiceRoller', function () {
   });
 
 
-  it('will fail if too dice size is > 100.', async () => {
+  it('will fail if too dice size is > 100.', async function() {
     const numberOfDie = 10;
     const dieSize = 101;
     const adjustment = 0;
@@ -123,7 +123,7 @@ describe('DiceRoller', function () {
   });
 
 
-  it('will fail if too large an adjustment is used.', async () => {
+  it('will fail if too large an adjustment is used.', async function() {
     const numberOfDie = 10;
     const dieSize = 100;
     const adjustment = 21;
@@ -138,7 +138,7 @@ describe('DiceRoller', function () {
     }
   });  
 
-  it('will fail if too small an adjustment is used.', async () => {
+  it('will fail if too small an adjustment is used.', async function() {
     const numberOfDie = 10;
     const dieSize = 100;
     const adjustment = -21;
@@ -153,7 +153,7 @@ describe('DiceRoller', function () {
     }
   });
 
-  it('will add roller to data structures.', async () => {
+  it('will add roller to data structures.', async function() {
     try {
       const numberOfDie = 10;
       const dieSize = 11;
@@ -195,7 +195,7 @@ describe('DiceRoller', function () {
     }
   });
 
-  it('will emit events when rollDiceFast is called.', async () => {
+  it('will emit events when rollDiceFast is called.', async function() {
     try {
       const numberOfDie = 10;
       const dieSize = 10;
@@ -248,13 +248,13 @@ describe('DiceRoller', function () {
     }
   }); 
 
-  it('will return an array from getUserRolls for all rolls by an address.', async () => {
+  it('will return an array from getUserRolls for all rolls by an address.', async function() {
     // console.log('Contract address: ' + diceRoller.address);
     let userRolls = await diceRoller.getUserRolls(addr1.address)
     assert.equal(userRolls.length, 0, "getUserRolls should be 0");
   });
 
-  it('will return an array from getUserRolls for all rolls by an address when they roll.', async () => {
+  it('will return an array from getUserRolls for all rolls by an address when they roll.', async function() {
     let totalUsers = await diceRoller.getAllUsersCount()
     assert.equal(totalUsers.toNumber(), 0, "totalUsers should be 0");
 
@@ -301,7 +301,7 @@ describe('DiceRoller', function () {
 
   });
  
-  it('will return an array from getUserRolls for all rolls by an address when they roll.', async () => {
+  it('will return an array from getUserRolls for all rolls by an address when they roll.', async function() {
     let totalUsers = await diceRoller.getAllUsersCount()
     assert.equal(totalUsers.toNumber(), 0, "totalUsers should be 0");
 
